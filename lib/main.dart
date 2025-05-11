@@ -1,4 +1,5 @@
 import 'package:college_hub/firebase_options.dart';
+import 'package:college_hub/functions.dart';
 import 'package:college_hub/model/theme.dart';
 import 'package:college_hub/model/user_model.dart';
 import 'package:college_hub/views/login_page.dart';
@@ -11,6 +12,7 @@ import 'package:college_hub/views/students_views/notification_view.dart';
 // import 'package:college_hub/views/students_views/profile_view.dart';
 import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:college_hub/views/students_views/study_schedule_view.dart';
 // import 'package:college_hub/views/students_views/study_schedule_view.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +25,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  FirebaseMessaging.onBackgroundMessage(notification);
+
   await Hive.openBox('college');
   // await Hive.openBox('settingsBox');
   bool isDarkMode = Hive.box('college').get('isDarkMode', defaultValue: false);
@@ -31,8 +35,21 @@ void main() async {
   runApp(CollegeHub());
 }
 
-class CollegeHub extends StatelessWidget {
+class CollegeHub extends StatefulWidget {
   const CollegeHub({super.key});
+
+  @override
+  State<CollegeHub> createState() => _CollegeHubState();
+}
+
+class _CollegeHubState extends State<CollegeHub> {
+  @override
+  void initState() {
+    super.initState();
+    requestPremession();
+    sendMessage();
+    getDeviceToken();
+  }
 
   @override
   Widget build(BuildContext context) {
