@@ -1,5 +1,6 @@
 // student_home_page.dart
 
+import 'package:college_hub/functions.dart';
 import 'package:college_hub/views/students_views/assignment_view.dart';
 import 'package:college_hub/views/students_views/grades_view.dart';
 import 'package:college_hub/widgets/Icon_theme.dart';
@@ -87,22 +88,5 @@ class _StudentHomePageState extends State<StudentHomePage> {
         ],
       ),
     );
-  }
-}
-
-String getTitleForIndex(int index) {
-  switch (index) {
-    case 0:
-      return 'الرئيسية';
-    case 1:
-      return 'جدول الدوام';
-    case 2:
-      return 'الدرجات';
-    case 3:
-      return 'الواجبات';
-    case 4:
-      return 'الملف الشخصي';
-    default:
-      return '';
   }
 }

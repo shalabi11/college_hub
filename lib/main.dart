@@ -5,6 +5,7 @@ import 'package:college_hub/model/user_model.dart';
 import 'package:college_hub/views/login_page.dart';
 import 'package:college_hub/views/sign_up_page.dart';
 import 'package:college_hub/views/splash_view.dart';
+// import 'package:college_hub/views/students_views/dashboard_view.dart';
 import 'package:college_hub/views/students_views/notification_view.dart';
 // import 'package:college_hub/views/students_views/ads_view.dart';
 // import 'package:college_hub/views/students_views/dashboard_view.dart';
@@ -22,7 +23,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(UserModelAdapter());
-  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   FirebaseMessaging.onBackgroundMessage(notification);

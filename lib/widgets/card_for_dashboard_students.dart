@@ -1,5 +1,7 @@
 import 'package:college_hub/constant.dart';
 import 'package:college_hub/core/styles.dart';
+import 'package:college_hub/functions.dart';
+// import 'package:college_hub/views/students_views/study_schedule_view.dart';
 // import 'package:college_hub/views/students_views/assignment_view.dart';
 // import 'package:college_hub/views/students_views/study_schedule_view.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +31,8 @@ class CardForDashboardStudents extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
+                getTitleForIndex(1);
+
                 // Navigator.pushReplacementNamed(context, StudyScheduleView.id);
               },
               child: Text(

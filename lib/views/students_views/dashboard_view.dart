@@ -2,6 +2,8 @@
 // import 'package:college_hub/core/styles.dart';
 // import 'package:college_hub/views/login_page.dart';
 // import 'package:college_hub/widgets/Bottom_navigate_bar.dart';
+import 'package:college_hub/functions.dart';
+import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:college_hub/widgets/card_for_dashboard_students.dart';
 import 'package:flutter/material.dart';
 

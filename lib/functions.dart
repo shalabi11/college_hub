@@ -3,6 +3,23 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 // import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
 
+String getTitleForIndex(int index) {
+  switch (index) {
+    case 0:
+      return 'الرئيسية';
+    case 1:
+      return 'جدول الدوام';
+    case 2:
+      return 'الدرجات';
+    case 3:
+      return 'الواجبات';
+    case 4:
+      return 'الملف الشخصي';
+    default:
+      return '';
+  }
+}
+
 Future<void> saveLoginData(String email, String password) async {
   var box = await Hive.openBox('college');
   await box.put('email', email);
