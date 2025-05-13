@@ -1,5 +1,6 @@
 // import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_hub/cubit/login_state.dart';
 import 'package:college_hub/functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -10,17 +11,24 @@ import 'package:hive_flutter/adapters.dart';
 class SignUpCubit extends Cubit<LoginState> {
   SignUpCubit() : super(LoginInitial());
   final FirebaseAuth auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
 
-  signup(String email, String password) async {
+  signup(String email, String password, String role) async {
     // print(email);
     // print(password);
     emit(LoginLoading());
     try {
-      await auth.createUserWithEmailAndPassword(
+      final userCredential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      saveLoginData(email, password);
+      final uid = userCredential.user!.uid;
+
+      await firestore.collection('users').doc(uid).set({
+        'email': email,
+        'role': role,
+      });
+      saveLoginData(email, password, role);
       var box = await Hive.openBox('userBox');
       box.put('isLoggedIn', true);
 

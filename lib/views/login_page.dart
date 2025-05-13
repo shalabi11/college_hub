@@ -27,6 +27,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController email = TextEditingController();
 
   final TextEditingController password = TextEditingController();
+  final TextEditingController role = TextEditingController();
+
   bool isLoadin = false;
 
   @override
@@ -98,13 +100,23 @@ class _LoginPageState extends State<LoginPage> {
                           obscure: true,
                           icon: Icon(Icons.lock_outlined, color: kTextLight),
                         ),
+                        CustomTextField(
+                          onChanged: (p0) {
+                            role.text = p0;
+                          },
+                          controller: role,
+                          // keyboardType: TextInputType.visiblePassword,
+                          text: "المهنة  ",
+                          obscure: true,
+                          icon: Icon(Icons.emoji_people, color: kTextLight),
+                        ),
 
                         // SizedBox(height: 20),
                         CustomBottun(
                           onTap: () async {
                             await BlocProvider.of<LoginCubit>(
                               context,
-                            ).login(email.text, password.text);
+                            ).login(email.text, password.text, role.text);
                             var box = await Hive.openBox('college');
                             box.put('isLoggedIn', true);
                           },

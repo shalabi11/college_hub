@@ -28,6 +28,7 @@ class _LoginPageState extends State<SignUpPage> {
   final TextEditingController email = TextEditingController();
 
   final TextEditingController password = TextEditingController();
+  final TextEditingController role = TextEditingController();
   bool isAsyncCAll = false;
 
   @override
@@ -99,13 +100,23 @@ class _LoginPageState extends State<SignUpPage> {
                           obscure: true,
                           icon: Icon(Icons.lock_outlined, color: kTextLight),
                         ),
+                        CustomTextField(
+                          onChanged: (p0) {
+                            role.text = p0;
+                          },
+                          controller: role,
+                          // keyboardType: TextInputType.visiblePassword,
+                          text: "المهنة",
+                          obscure: true,
+                          icon: Icon(Icons.emoji_people, color: kTextLight),
+                        ),
 
                         // SizedBox(height: 20),
                         CustomBottun(
                           onTap: () async {
                             await BlocProvider.of<SignUpCubit>(
                               context,
-                            ).signup(email.text, password.text);
+                            ).signup(email.text, password.text, role.text);
                             var box = await Hive.openBox('college');
                             box.put('isLoggedIn', true);
                           },

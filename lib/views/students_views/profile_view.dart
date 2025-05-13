@@ -37,6 +37,7 @@ class ProfileView extends StatelessWidget {
           Widget imageWidget;
           if (state is ProfileUploaded) {
             log('succes');
+
             imageWidget = CircleAvatar(
               radius: 100,
               backgroundImage: NetworkImage(state.imageUrl),

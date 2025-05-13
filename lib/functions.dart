@@ -20,23 +20,26 @@ String getTitleForIndex(int index) {
   }
 }
 
-Future<void> saveLoginData(String email, String password) async {
+Future<void> saveLoginData(String email, String password, String role) async {
   var box = await Hive.openBox('college');
   await box.put('email', email);
   await box.put('password', password);
+  await box.put('role', role);
 }
 
 Future<bool> isUserLoggedIn() async {
   var box = await Hive.openBox('college');
   String? email = box.get('email');
   String? password = box.get('password');
-  return email != null && password != null;
+  String? role = box.get('role');
+  return email != null && password != null && role != null;
 }
 
 Future<void> logOut() async {
   var box = await Hive.openBox('college');
   await box.delete('email');
   await box.delete('password');
+  await box.delete('role');
 }
 
 Future<void> notification(RemoteMessage message) async {

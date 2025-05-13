@@ -25,7 +25,7 @@ class CustomBottun extends StatelessWidget {
         decoration: BoxDecoration(
           color: color,
           border: Border.all(color: kPrimaryBlue),
-          borderRadius: BorderRadius.all(Radius.circular(5)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
         height: 50,
         width: double.infinity,
