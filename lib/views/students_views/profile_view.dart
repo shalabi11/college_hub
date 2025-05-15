@@ -52,6 +52,7 @@ class ProfileView extends StatelessWidget {
               radius: 100,
               child: Icon(Icons.person, size: 100, color: Colors.grey),
             );
+            ProfileCubit().uploadProfileImage();
           }
           return Scaffold(
             // appBar: CustomAppBar(),
@@ -68,14 +69,18 @@ class ProfileView extends StatelessWidget {
                       imageWidget,
 
                       ElevatedButton(
-                        onPressed: () => cubit.pickImage(),
+                        onPressed: () {
+                          cubit.pickImage();
+
+                          cubit.uploadProfileImage();
+                        },
                         child: Icon(Icons.add),
                       ),
                     ],
                   ),
                   Text('اسم الطالب', style: Styles.textStyle30),
                   Text('[الرقم الجامعي]', style: Styles.textStyle16),
-                  InformationForStudent(name: 'التخصص'),
+                  InformationForStudent(name: 'طالب'),
                   InformationForStudent(name: 'السنة الدراسية'),
                   InformationForStudent(name: "${cubit.user!.email}"),
 

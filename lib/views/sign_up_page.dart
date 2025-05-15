@@ -25,6 +25,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<SignUpPage> {
+  final List<String> jobs = ['طالب', 'دكتور', 'موظف'];
+  String? selectedJob;
+  final formKey = GlobalKey<FormState>();
   final TextEditingController email = TextEditingController();
 
   final TextEditingController password = TextEditingController();
@@ -61,84 +64,97 @@ class _LoginPageState extends State<SignUpPage> {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Icon(Icons.school, size: 150, color: kPrimaryBlue),
-                        // Text(
-                        //   "CollegeHub",
-                        //   style: TextStyle(
-                        //     fontSize: 30,
-                        //     fontWeight: FontWeight.bold,
-                        //     color: kPrimaryBlue,
-                        //   ),
-                        Image.asset(logo, height: 300),
+                  child: Form(
+                    key: formKey,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Icon(Icons.school, size: 150, color: kPrimaryBlue),
+                          // Text(
+                          //   "CollegeHub",
+                          //   style: TextStyle(
+                          //     fontSize: 30,
+                          //     fontWeight: FontWeight.bold,
+                          //     color: kPrimaryBlue,
+                          //   ),
+                          Image.asset(logo, height: 300),
 
-                        // SizedBox(height: 20),
-                        CustomTextField(
-                          onChanged: (p0) {
-                            email.text = p0;
-                          },
-                          controller: email,
-                          keyboardType: TextInputType.emailAddress,
-                          text: "الرقم الجامعي أو البريد الالكتروني",
-                          icon: Icon(
-                            Icons.person_2_outlined,
-                            color: kTextLight,
+                          // SizedBox(height: 20),
+                          CustomTextField(
+                            validator: (p0) {
+                              if (p0 == null || p0.isEmpty) {
+                                return 'الرجاء ادخال البريد الالكتروني ';
+                              }
+                              return null;
+                            },
+                            onChanged: (p0) {
+                              email.text = p0;
+                            },
+                            controller: email,
+                            keyboardType: TextInputType.emailAddress,
+                            text: "الرقم الجامعي أو البريد الالكتروني",
+                            icon: Icon(
+                              Icons.person_2_outlined,
+                              color: kTextLight,
+                            ),
                           ),
-                        ),
-                        // SizedBox(height: 20),
-                        CustomTextField(
-                          onChanged: (p0) {
-                            password.text = p0;
-                          },
-                          controller: password,
-                          keyboardType: TextInputType.visiblePassword,
-                          text: "كلمة المرور ",
-                          obscure: true,
-                          icon: Icon(Icons.lock_outlined, color: kTextLight),
-                        ),
-                        CustomTextField(
-                          onChanged: (p0) {
-                            role.text = p0;
-                          },
-                          controller: role,
-                          // keyboardType: TextInputType.visiblePassword,
-                          text: "المهنة",
-                          obscure: true,
-                          icon: Icon(Icons.emoji_people, color: kTextLight),
-                        ),
-
-                        // SizedBox(height: 20),
-                        CustomBottun(
-                          onTap: () async {
-                            await BlocProvider.of<SignUpCubit>(
-                              context,
-                            ).signup(email.text, password.text, role.text);
-                            var box = await Hive.openBox('college');
-                            box.put('isLoggedIn', true);
-                          },
-                          color: kPrimaryBlue,
-                          text: 'انشاء حساب ',
-                          page: StudentHomePage.id,
-                        ),
-                        SizedBox(height: 20),
-
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              LoginPage.id,
-                            );
-                          },
-                          child: Text(
-                            'تسجيل دخول ',
-                            style: TextStyle(color: kPrimaryBlue),
+                          // SizedBox(height: 20),
+                          CustomTextField(
+                            validator: (p0) {
+                              if (p0 == null || p0.isEmpty) {
+                                return 'الرجاء ادخال كلمة المرور ';
+                              }
+                              return null;
+                            },
+                            controller: password,
+                            keyboardType: TextInputType.visiblePassword,
+                            text: "كلمة المرور ",
+                            obscure: true,
+                            icon: Icon(Icons.lock_outlined, color: kTextLight),
                           ),
-                        ),
-                      ],
+                          selectJob(),
+
+                          SizedBox(height: 20),
+                          CustomBottun(
+                            onTap: () async {
+                              if (formKey.currentState!.validate()) {
+                                await BlocProvider.of<SignUpCubit>(
+                                  context,
+                                ).signup(
+                                  email.text,
+                                  password.text,
+                                  selectedJob!,
+                                );
+                                var box = await Hive.openBox('college');
+                                box.put('isLoggedIn', true);
+                                // Navigator.pushReplacementNamed(
+                                //   context,
+                                //   StudentHomePage.id,
+                                // );
+                              }
+                            },
+                            color: kPrimaryBlue,
+                            text: 'انشاء حساب ',
+                            page: StudentHomePage.id,
+                          ),
+                          SizedBox(height: 20),
+
+                          GestureDetector(
+                            onTap: () async {
+                              Navigator.pushReplacementNamed(
+                                context,
+                                LoginPage.id,
+                              );
+                            },
+                            child: Text(
+                              'تسجيل دخول ',
+                              style: TextStyle(color: kPrimaryBlue),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -147,6 +163,26 @@ class _LoginPageState extends State<SignUpPage> {
           ),
         ),
       ),
+    );
+  }
+
+  DropdownButtonFormField<String> selectJob() {
+    return DropdownButtonFormField<String>(
+      decoration: InputDecoration(
+        labelText: 'اختر المهنة',
+        border: OutlineInputBorder(),
+      ),
+      value: selectedJob,
+      items:
+          jobs.map((job) {
+            return DropdownMenuItem<String>(value: job, child: Text(job));
+          }).toList(),
+      onChanged: (value) {
+        setState(() {
+          selectedJob = value;
+        });
+      },
+      validator: (value) => value == null ? 'الرجاء اختيار المهنة' : null,
     );
   }
 }

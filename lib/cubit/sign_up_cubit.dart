@@ -28,7 +28,7 @@ class SignUpCubit extends Cubit<LoginState> {
         'email': email,
         'role': role,
       });
-      saveLoginData(email, password, role);
+      saveLoginData(email, password);
       var box = await Hive.openBox('userBox');
       box.put('isLoggedIn', true);
 

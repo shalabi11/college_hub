@@ -1,4 +1,5 @@
 // 📦 profile_cubit.dart
+import 'dart:developer';
 import 'dart:io';
 // ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
@@ -43,15 +44,15 @@ class ProfileCubit extends Cubit<ProfileState> {
       await ref.putFile(profileImageFile!);
       final url = await ref.getDownloadURL();
 
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user!.uid)
-          .update({'profileImage': url});
+      await FirebaseFirestore.instance.collection('users').doc(user!.uid).set({
+        'profileImage': url,
+      });
 
       await user!.updatePhotoURL(url);
 
       emit(ProfileUploaded(url));
     } catch (e) {
+      log('🔴 خطأ أثناء رفع الصورة: $e');
       emit(ProfileError('فشل رفع الصورة'));
     }
   }

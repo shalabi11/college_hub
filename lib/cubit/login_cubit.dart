@@ -23,13 +23,10 @@ class LoginCubit extends Cubit<LoginState> {
         email: email,
         password: password,
       );
-      final uid = userCredential.user!.uid;
+      // final uid = userCredential.user!.uid;
 
-      await firestore.collection('users').doc(uid).set({
-        'email': email,
-        'role': role,
-      });
-      saveLoginData(email, password, role);
+      // await firestore.collection('users').doc(uid).set({'email': email});
+      saveLoginData(email, password);
       var box = await Hive.openBox('userBox');
       box.put('isLoggedIn', true);
 

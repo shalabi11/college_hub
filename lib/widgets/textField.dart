@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
     this.obscure,
     this.icon,
     this.keyboardType,
+    required this.validator,
 
     this.controller,
   });
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   TextEditingController? controller;
   TextInputType? keyboardType;
   Function(String)? onChanged;
+  String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: TextFormField(
+          validator: validator,
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
