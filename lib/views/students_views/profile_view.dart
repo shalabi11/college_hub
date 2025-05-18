@@ -18,8 +18,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // import 'package:hive_flutter/adapters.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+  const ProfileView({
+    super.key,
+    required this.name,
+    required this.uid,
+    required this.role,
+  });
   static String id = 'profile view';
+  final String name;
+  final String uid;
+  final String role;
 
   @override
   Widget build(BuildContext context) {
@@ -78,9 +86,9 @@ class ProfileView extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Text('اسم الطالب', style: Styles.textStyle30),
-                  Text('[الرقم الجامعي]', style: Styles.textStyle16),
-                  InformationForStudent(name: 'طالب'),
+                  Text(name, style: Styles.textStyle30),
+                  Text(uid, style: Styles.textStyle16),
+                  InformationForStudent(name: role),
                   InformationForStudent(name: 'السنة الدراسية'),
                   InformationForStudent(name: "${cubit.user!.email}"),
 

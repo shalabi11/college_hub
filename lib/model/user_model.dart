@@ -8,7 +8,7 @@ class UserModel extends HiveObject {
   final String email;
 
   @HiveField(1)
-  final String name;
+  late final String name;
 
   @HiveField(2)
   final String universityId;

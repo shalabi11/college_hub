@@ -13,10 +13,12 @@ class CustomTextField extends StatelessWidget {
     required this.validator,
 
     this.controller,
+    this.maxLine,
   });
   String? text;
   bool? obscure;
   Icon? icon;
+  int? maxLine;
   TextEditingController? controller;
   TextInputType? keyboardType;
   Function(String)? onChanged;
@@ -28,6 +30,7 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: TextFormField(
+          maxLines: maxLine,
           validator: validator,
           onChanged: onChanged,
           controller: controller,
@@ -45,7 +48,11 @@ class CustomTextField extends StatelessWidget {
             //   fontWeight: FontWeight.w100,
             // ),
             border: OutlineInputBorder(
-              borderSide: const BorderSide(color: kPrimaryBlue),
+              borderSide: const BorderSide(
+                color: kPrimaryBlue,
+                strokeAlign: 200,
+              ),
+
               borderRadius: BorderRadius.circular(12),
               gapPadding: 12,
             ),

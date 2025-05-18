@@ -45,36 +45,33 @@ class _LoginPageState extends State<LoginPage> {
         child: Scaffold(
           body: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) async {
-              final user = FirebaseAuth.instance.currentUser;
+              // final user = FirebaseAuth.instance.currentUser;
 
-              final doc =
-                  await FirebaseFirestore.instance
-                      .collection('users')
-                      .doc(user!.uid)
-                      .get();
+              // final doc =
+              //     await FirebaseFirestore.instance
+              //         .collection('users')
+              //         .doc(user!.uid)
+              //         .get();
 
-              final savedRole = doc.data()?['role'];
+              // final savedRole = doc.data()?['role'];
 
               if (state is LoginSucces) {
-                if (savedRole != selectedJob.toString()) {
-                  showSnackBar(
-                    context,
-                    '⚠️ المهنة لا تطابق بيانات الحساب',
-                    Colors.red,
-                  );
-                  isLoadin = false;
-                  setState(() {});
-                  await FirebaseAuth.instance.signOut(); // نسجل خروج مباشرة
-                  return;
-                }
+                showSnackBar(context, 'تم تسجيل الدخول بنجاح', Colors.green);
 
                 isLoadin = false;
                 setState(() {});
-                showSnackBar(context, 'تم تسجيل الدخول بنجاح', Colors.green);
-                Navigator.pushReplacementNamed(context, StudentHomePage.id);
+                // await FirebaseAuth.instance.signOut(); // نسجل خروج مباشرة
+                // return;
+                // }
+
+                // isLoadin = false;
+                // setState(() {});
+
+                // Navigator.pushReplacementNamed(context, StudentHomePage.id);
               } else if (state is LoginFailure) {
                 isLoadin = false;
                 setState(() {});
+
                 showSnackBar(context, state.message, Colors.red);
               } else if (state is LoginLoading) {
                 isLoadin = true;
@@ -115,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             controller: email,
                             keyboardType: TextInputType.emailAddress,
-                            text: "الرقم الجامعي أو البريد الالكتروني",
+                            text: "البريد الالكتروني",
                             icon: Icon(
                               Icons.person_2_outlined,
                               color: kTextLight,
@@ -123,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           // SizedBox(height: 20),
                           CustomTextField(
+                            maxLine: 1,
                             validator: (p0) {
                               if (p0 == null || p0.isEmpty) {
                                 return 'الرجاء ادخال كلمة المرور ';
@@ -149,11 +147,15 @@ class _LoginPageState extends State<LoginPage> {
                                   email.text,
                                   password.text,
                                   selectedJob!,
+                                  context,
                                 );
 
                                 var box = await Hive.openBox('college');
+                                // box.clear();
                                 box.put('isLoggedIn', true);
                               }
+                              isLoadin = false;
+                              setState(() {});
                             },
                             color: kPrimaryBlue,
                             text: 'تسجيل الدخول ',

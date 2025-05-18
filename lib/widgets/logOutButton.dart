@@ -1,5 +1,6 @@
 import 'package:college_hub/views/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class LogOutButton extends StatelessWidget {
   const LogOutButton({super.key});
@@ -24,7 +25,9 @@ class LogOutButton extends StatelessWidget {
                 ),
                 ElevatedButton(
                   child: Text("تسجيل الخروج"),
-                  onPressed: () {
+                  onPressed: () async {
+                    var box = await Hive.openBox('college');
+                    box.clear();
                     Navigator.of(context).pop(); // إغلاق الديالوج
                     Navigator.pushReplacementNamed(context, LoginPage.id);
                   },

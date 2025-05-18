@@ -8,7 +8,7 @@ class AssignmentView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text('سيتم عرض الواجبات هنا ', style: Styles.textStyle20),
+        child: Text('سيتم عرض توزيع القاعات هنا ', style: Styles.textStyle20),
       ),
     );
   }

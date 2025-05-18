@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:college_hub/constant.dart';
+import 'package:college_hub/views/doctors_views/doctors_home_view.dart';
 import 'package:college_hub/views/login_page.dart';
 import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,24 @@ class _SplashViewState extends State<SplashView> {
       Timer(const Duration(seconds: 4), () async {
         var box = await Hive.openBox('college');
         var isLoggedIn = box.get('isLoggedIn', defaultValue: false);
-        if (isLoggedIn) {
+        var role = box.get('role');
+
+        if (isLoggedIn && role != null) {
+          Widget targetPage;
+
+          if (role == 'طالب') {
+            targetPage = StudentHomePage();
+          } else if (role == 'دكتور') {
+            targetPage = DoctorsHomeView();
+          } else {
+            targetPage = LoginPage(); // لأي دور غير معروف
+          }
+
           Navigator.pushReplacement(
             context,
             PageRouteBuilder(
               pageBuilder:
-                  (context, animation, secondaryAnimation) => StudentHomePage(),
+                  (context, animation, secondaryAnimation) => targetPage,
               transitionsBuilder: (
                 context,
                 animation,

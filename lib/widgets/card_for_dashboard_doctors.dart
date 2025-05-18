@@ -6,8 +6,8 @@ import 'package:college_hub/functions.dart';
 // import 'package:college_hub/views/students_views/study_schedule_view.dart';
 import 'package:flutter/material.dart';
 
-class CardForDashboardStudents extends StatelessWidget {
-  const CardForDashboardStudents({super.key, required this.text});
+class CardForDashboardDoctors extends StatelessWidget {
+  const CardForDashboardDoctors({super.key, required this.text});
   final String text;
 
   @override
@@ -25,14 +25,14 @@ class CardForDashboardStudents extends StatelessWidget {
               style: Styles.textStyle20.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
-          DataOfCardDashboard(),
-          DataOfCardDashboard(),
+          Center(child: DataOfCardDashboard()),
 
+          // DataOfCardDashboard(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
               onTap: () {
-                getTitleForIndexStudent(1);
+                // getTitleForIndex(1);
 
                 // Navigator.pushReplacementNamed(context, StudyScheduleView.id);
               },
@@ -58,9 +58,19 @@ class DataOfCardDashboard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text('data', style: Styles.textStyle16),
+          Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('نظم تشغيل 2 ', style: Styles.textStyle18),
+              Text(
+                'الساعة 10 صباحا',
+                style: Styles.textStyle14.copyWith(color: Colors.grey),
+              ),
+            ],
+          ),
           Text(
-            'الساعة 10 صباحا',
+            'القاعة 10 ',
             style: Styles.textStyle16.copyWith(color: Colors.grey),
           ),
         ],

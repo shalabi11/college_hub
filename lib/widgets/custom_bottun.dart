@@ -10,12 +10,12 @@ class CustomBottun extends StatelessWidget {
     super.key,
     required this.color,
     required this.text,
-    required this.page,
+    this.page,
     required this.onTap,
   });
   final Color color;
   final String text;
-  final String page;
+  final String? page;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,8 @@ import 'package:college_hub/firebase_options.dart';
 import 'package:college_hub/functions.dart';
 import 'package:college_hub/model/theme.dart';
 import 'package:college_hub/model/user_model.dart';
+import 'package:college_hub/views/doctors_views/doctors_home_view.dart';
+import 'package:college_hub/views/doctors_views/send_not_view.dart';
 import 'package:college_hub/views/login_page.dart';
 import 'package:college_hub/views/sign_up_page.dart';
 import 'package:college_hub/views/splash_view.dart';
@@ -74,10 +76,12 @@ class _CollegeHubState extends State<CollegeHub> {
               StudentHomePage.id: (context) => StudentHomePage(),
               SplashView.id: (context) => SplashView(),
               SignUpPage.id: (context) => SignUpPage(),
+              DoctorsHomeView.id: (context) => DoctorsHomeView(),
               // DashboardView.id: (context) => DashboardView(),
               // StudyScheduleView.id: (context) => StudyScheduleView(),
               // AdsView.id: (context) => AdsView(),
               NotificationView.id: (context) => NotificationView(),
+              SendNotView.id: (context) => SendNotView(),
               // ProfileView.id: (context) => ProfileView(),
             },
             initialRoute: SplashView.id,

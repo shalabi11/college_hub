@@ -1,16 +1,19 @@
 // import 'dart:developer';
 
 import 'package:college_hub/constant.dart';
-import 'package:college_hub/cubit/login_cubit.dart';
+// import 'package:college_hub/cubit/login_cubit.dart';
 import 'package:college_hub/cubit/login_state.dart';
 import 'package:college_hub/cubit/sign_up_cubit.dart';
 import 'package:college_hub/helper/show_snack_bar.dart';
+import 'package:college_hub/model/user_model.dart';
+// import 'package:college_hub/views/doctors_views/doctors_home_view.dart';
 import 'package:college_hub/views/login_page.dart';
 // import 'package:college_hub/views/students_views/dashboard_view.dart';
-import 'package:college_hub/views/students_views/student_home_page.dart';
+// import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:college_hub/widgets/custom_bottun.dart';
 import 'package:college_hub/widgets/textField.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -28,9 +31,12 @@ class _LoginPageState extends State<SignUpPage> {
   final List<String> jobs = ['طالب', 'دكتور', 'موظف'];
   String? selectedJob;
   final formKey = GlobalKey<FormState>();
+  UserModel? userModel;
   final TextEditingController email = TextEditingController();
 
   final TextEditingController password = TextEditingController();
+  final TextEditingController name = TextEditingController();
+
   final TextEditingController role = TextEditingController();
   bool isAsyncCAll = false;
 
@@ -46,11 +52,11 @@ class _LoginPageState extends State<SignUpPage> {
             listener: (context, state) {
               if (state is LoginSucces) {
                 showSnackBar(context, ' تم انشاء حساب بنجاح', Colors.green);
-                Navigator.pushReplacementNamed(context, StudentHomePage.id);
+                // Navigator.pushReplacementNamed(context, StudentHomePage.id);
                 isAsyncCAll = false;
                 setState(() {});
               } else if (state is LoginFailure) {
-                showSnackBar(context, state.message, Colors.red);
+                showSnackBar(context, 'state.message', Colors.red);
                 print('email : ${email.text}');
                 print(password.text);
                 isAsyncCAll = false;
@@ -85,6 +91,24 @@ class _LoginPageState extends State<SignUpPage> {
                           CustomTextField(
                             validator: (p0) {
                               if (p0 == null || p0.isEmpty) {
+                                return 'الرجاء ادخال الاسم الثلاثي ';
+                              }
+                              return null;
+                            },
+                            onChanged: (p0) {
+                              name.text = p0;
+                            },
+                            controller: name,
+                            keyboardType: TextInputType.name,
+                            text: 'الاسم الثلاثي ',
+                            icon: Icon(
+                              Icons.person_2_outlined,
+                              color: kTextLight,
+                            ),
+                          ),
+                          CustomTextField(
+                            validator: (p0) {
+                              if (p0 == null || p0.isEmpty) {
                                 return 'الرجاء ادخال البريد الالكتروني ';
                               }
                               return null;
@@ -94,7 +118,7 @@ class _LoginPageState extends State<SignUpPage> {
                             },
                             controller: email,
                             keyboardType: TextInputType.emailAddress,
-                            text: "الرقم الجامعي أو البريد الالكتروني",
+                            text: "البريد الالكتروني",
                             icon: Icon(
                               Icons.person_2_outlined,
                               color: kTextLight,
@@ -110,6 +134,7 @@ class _LoginPageState extends State<SignUpPage> {
                             },
                             controller: password,
                             keyboardType: TextInputType.visiblePassword,
+                            maxLine: 1,
                             text: "كلمة المرور ",
                             obscure: true,
                             icon: Icon(Icons.lock_outlined, color: kTextLight),
@@ -126,8 +151,10 @@ class _LoginPageState extends State<SignUpPage> {
                                   email.text,
                                   password.text,
                                   selectedJob!,
+                                  context,
                                 );
                                 var box = await Hive.openBox('college');
+                                // box.clear();
                                 box.put('isLoggedIn', true);
                                 // Navigator.pushReplacementNamed(
                                 //   context,
@@ -137,7 +164,7 @@ class _LoginPageState extends State<SignUpPage> {
                             },
                             color: kPrimaryBlue,
                             text: 'انشاء حساب ',
-                            page: StudentHomePage.id,
+                            // page: StudentHomePage.id,
                           ),
                           SizedBox(height: 20),
 
@@ -180,6 +207,11 @@ class _LoginPageState extends State<SignUpPage> {
       onChanged: (value) {
         setState(() {
           selectedJob = value;
+          // if (selectedJob == 'طالب') {
+          //   Navigator.pushReplacementNamed(context, StudentHomePage.id);
+          // } else if (selectedJob == 'دكتور') {
+          //   Navigator.pushReplacementNamed(context, DoctorsHomeView.id);
+          // }
         });
       },
       validator: (value) => value == null ? 'الرجاء اختيار المهنة' : null,

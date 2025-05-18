@@ -8,5 +8,6 @@ class LoginSucces extends LoginState {}
 
 class LoginFailure extends LoginState {
   String message;
+
   LoginFailure({required this.message});
 }

@@ -1,37 +1,37 @@
 // student_home_page.dart
 
 import 'package:college_hub/functions.dart';
-import 'package:college_hub/views/students_views/assignment_view.dart';
+import 'package:college_hub/views/doctors_views/course_view_doctors.dart';
+import 'package:college_hub/views/doctors_views/dashboard_for_doctors.dart';
+import 'package:college_hub/views/doctors_views/send_not_view.dart';
+// import 'package:college_hub/views/students_views/assignment_view.dart';
 import 'package:college_hub/views/students_views/grades_view.dart';
 import 'package:college_hub/widgets/Icon_theme.dart';
 import 'package:college_hub/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:college_hub/views/students_views/dashboard_view.dart';
-import 'package:college_hub/views/students_views/study_schedule_view.dart';
-// import 'package:college_hub/views/students_views/ads_view.dart';
-import 'package:college_hub/views/students_views/notification_view.dart';
+// import 'package:college_hub/views/students_views/dashboard_view.dart';
+// import 'package:college_hub/views/students_views/study_schedule_view.dart';
+// // import 'package:college_hub/views/students_views/ads_view.dart';
+// import 'package:college_hub/views/students_views/notification_view.dart';
 import 'package:college_hub/views/students_views/profile_view.dart';
 import 'package:college_hub/constant.dart';
 
-class StudentHomePage extends StatefulWidget {
-  static String id = 'student_home'; // استخدمه بالتنقل
-  const StudentHomePage({super.key});
+class DoctorsHomeView extends StatefulWidget {
+  static String id = 'doctors_home'; // استخدمه بالتنقل
+  const DoctorsHomeView({super.key});
 
   @override
-  State<StudentHomePage> createState() => _StudentHomePageState();
+  State<DoctorsHomeView> createState() => _DoctorHomePageState();
 }
 
-class _StudentHomePageState extends State<StudentHomePage> {
+class _DoctorHomePageState extends State<DoctorsHomeView> {
   int _selectedIndex = 0;
 
   final List<Widget> _views = [
-    DashboardView(),
-    StudyScheduleView(),
-    // AdsView(),
-    // NotificationView(),
+    DashboardForDoctors(),
+    CourseViewDoctors(),
     GradesView(),
-    AssignmentView(),
-    ProfileView(name: 'اسم الطالب', role: 'طالب', uid: 'الرقم الجامعي'),
+    ProfileView(name: 'اسم الدكتور', role: 'دكتور', uid: 'id'),
   ];
 
   void _onItemTapped(int index) {
@@ -44,13 +44,13 @@ class _StudentHomePageState extends State<StudentHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: getTitleForIndexStudent(_selectedIndex),
+        title: getTitleForIndexDoctors(_selectedIndex),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, NotificationView.id);
+              Navigator.pushNamed(context, SendNotView.id);
             },
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.edit_notifications_outlined),
           ),
           IconThemeApp(),
         ],
@@ -71,19 +71,19 @@ class _StudentHomePageState extends State<StudentHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
-            label: 'الجدول',
+            label: 'المقررات',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.school), // ← الدرجات بدل الإعلانات
             label: 'الدرجات',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.task), // ← الواجبات بدل الإشعارات
-            label: 'القاعة الامتحانية',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.task), // ← الواجبات بدل الإشعارات
+          //   label: 'القاعة الامتحانية',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'الملف الشخصي',
+            label: ' الملف الشخصي',
           ),
         ],
       ),
