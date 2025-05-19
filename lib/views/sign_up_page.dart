@@ -1,19 +1,17 @@
 // import 'dart:developer';
 
 import 'package:college_hub/constant.dart';
-// import 'package:college_hub/cubit/login_cubit.dart';
+
 import 'package:college_hub/cubit/login_state.dart';
 import 'package:college_hub/cubit/sign_up_cubit.dart';
 import 'package:college_hub/helper/show_snack_bar.dart';
 import 'package:college_hub/model/user_model.dart';
-// import 'package:college_hub/views/doctors_views/doctors_home_view.dart';
+
 import 'package:college_hub/views/login_page.dart';
-// import 'package:college_hub/views/students_views/dashboard_view.dart';
-// import 'package:college_hub/views/students_views/student_home_page.dart';
+
 import 'package:college_hub/widgets/custom_bottun.dart';
 import 'package:college_hub/widgets/textField.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -52,7 +50,7 @@ class _LoginPageState extends State<SignUpPage> {
             listener: (context, state) {
               if (state is LoginSucces) {
                 showSnackBar(context, ' تم انشاء حساب بنجاح', Colors.green);
-                // Navigator.pushReplacementNamed(context, StudentHomePage.id);
+
                 isAsyncCAll = false;
                 setState(() {});
               } else if (state is LoginFailure) {
@@ -74,17 +72,8 @@ class _LoginPageState extends State<SignUpPage> {
                     key: formKey,
                     child: SingleChildScrollView(
                       child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Icon(Icons.school, size: 150, color: kPrimaryBlue),
-                          // Text(
-                          //   "CollegeHub",
-                          //   style: TextStyle(
-                          //     fontSize: 30,
-                          //     fontWeight: FontWeight.bold,
-                          //     color: kPrimaryBlue,
-                          //   ),
                           Image.asset(logo, height: 300),
 
                           // SizedBox(height: 20),
@@ -107,6 +96,7 @@ class _LoginPageState extends State<SignUpPage> {
                             ),
                           ),
                           CustomTextField(
+                            maxLine: 1,
                             validator: (p0) {
                               if (p0 == null || p0.isEmpty) {
                                 return 'الرجاء ادخال البريد الالكتروني ';
@@ -124,7 +114,7 @@ class _LoginPageState extends State<SignUpPage> {
                               color: kTextLight,
                             ),
                           ),
-                          // SizedBox(height: 20),
+
                           CustomTextField(
                             validator: (p0) {
                               if (p0 == null || p0.isEmpty) {
@@ -154,17 +144,12 @@ class _LoginPageState extends State<SignUpPage> {
                                   context,
                                 );
                                 var box = await Hive.openBox('college');
-                                // box.clear();
+
                                 box.put('isLoggedIn', true);
-                                // Navigator.pushReplacementNamed(
-                                //   context,
-                                //   StudentHomePage.id,
-                                // );
                               }
                             },
                             color: kPrimaryBlue,
                             text: 'انشاء حساب ',
-                            // page: StudentHomePage.id,
                           ),
                           SizedBox(height: 20),
 
@@ -207,23 +192,9 @@ class _LoginPageState extends State<SignUpPage> {
       onChanged: (value) {
         setState(() {
           selectedJob = value;
-          // if (selectedJob == 'طالب') {
-          //   Navigator.pushReplacementNamed(context, StudentHomePage.id);
-          // } else if (selectedJob == 'دكتور') {
-          //   Navigator.pushReplacementNamed(context, DoctorsHomeView.id);
-          // }
         });
       },
       validator: (value) => value == null ? 'الرجاء اختيار المهنة' : null,
     );
   }
 }
-
-//   Future<void> signUp() async {
-//     UserCredential userCredential = await FirebaseAuth.instance
-//         .createUserWithEmailAndPassword(
-//           email: email.text,
-//           password: password.text,
-//         );
-//   }
-// }
