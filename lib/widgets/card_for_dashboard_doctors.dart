@@ -1,9 +1,6 @@
 import 'package:college_hub/constant.dart';
 import 'package:college_hub/core/styles.dart';
-import 'package:college_hub/functions.dart';
-// import 'package:college_hub/views/students_views/study_schedule_view.dart';
-// import 'package:college_hub/views/students_views/assignment_view.dart';
-// import 'package:college_hub/views/students_views/study_schedule_view.dart';
+
 import 'package:flutter/material.dart';
 
 class CardForDashboardDoctors extends StatelessWidget {
@@ -27,15 +24,10 @@ class CardForDashboardDoctors extends StatelessWidget {
           ),
           Center(child: DataOfCardDashboard()),
 
-          // DataOfCardDashboard(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: GestureDetector(
-              onTap: () {
-                // getTitleForIndex(1);
-
-                // Navigator.pushReplacementNamed(context, StudyScheduleView.id);
-              },
+              onTap: () {},
               child: Text(
                 'عرض الجدول بالكامل ',
                 style: Styles.textStyle16.copyWith(color: kPrimaryBlue),

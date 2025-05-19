@@ -27,7 +27,6 @@ class CardForStudentSchedule extends StatelessWidget {
                 Text(
                   'مقدمة في البرمجة ',
                   style: Styles.textStyle20.copyWith(
-                    // color: kTextColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -36,7 +35,6 @@ class CardForStudentSchedule extends StatelessWidget {
                   child: Text(
                     '10:00 ص - 11:30 ص',
                     style: Styles.textStyle14.copyWith(
-                      // color: kTextColor,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -44,7 +42,6 @@ class CardForStudentSchedule extends StatelessWidget {
                 Text(
                   'القاعة 6 - د.محمد',
                   style: Styles.textStyle14.copyWith(
-                    // color: kTextColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

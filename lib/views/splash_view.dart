@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:college_hub/constant.dart';
 import 'package:college_hub/views/doctors_views/doctors_home_view.dart';
+import 'package:college_hub/views/employees_views/employee_home_view.dart';
 import 'package:college_hub/views/login_page.dart';
 import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +33,10 @@ class _SplashViewState extends State<SplashView> {
             targetPage = StudentHomePage();
           } else if (role == 'دكتور') {
             targetPage = DoctorsHomeView();
+          } else if (role == 'موظف') {
+            targetPage = EmployeeHomeView();
           } else {
-            targetPage = LoginPage(); // لأي دور غير معروف
+            targetPage = LoginPage();
           }
 
           Navigator.pushReplacement(

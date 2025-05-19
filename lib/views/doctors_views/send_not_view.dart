@@ -1,11 +1,9 @@
-// import 'package:college_hub/widgets/Bottom_navigate_bar.dart';
-import 'package:college_hub/constant.dart';
 import 'package:college_hub/core/styles.dart';
-// import 'package:college_hub/widgets/card_for_student_schedule.dart';
+
 import 'package:college_hub/widgets/custom_app_bar.dart';
-import 'package:college_hub/widgets/custom_bottun.dart';
+
 import 'package:college_hub/widgets/elevated_button_for_confirm.dart';
-import 'package:college_hub/widgets/textField.dart';
+import 'package:college_hub/widgets/text_field.dart';
 import 'package:flutter/material.dart';
 
 class SendNotView extends StatefulWidget {
@@ -93,11 +91,6 @@ class _SendNotViewState extends State<SendNotView> {
       onChanged: (value) {
         setState(() {
           selectedJob = value;
-          // if (selectedJob == 'طالب') {
-          //   Navigator.pushReplacementNamed(context, StudentHomePage.id);
-          // } else if (selectedJob == 'دكتور') {
-          //   Navigator.pushReplacementNamed(context, DoctorsHomeView.id);
-          // }
         });
       },
       validator: (value) => value == null ? 'الرجاء اختيار الوجهة' : null,

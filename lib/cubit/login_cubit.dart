@@ -1,16 +1,13 @@
-// import 'dart:developer';
-
-// import 'package:college_hub/cubit/login_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_hub/cubit/login_state.dart';
 import 'package:college_hub/functions.dart';
 import 'package:college_hub/views/doctors_views/doctors_home_view.dart';
+import 'package:college_hub/views/employees_views/employee_home_view.dart';
 import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-// import 'package:hive/hive.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
@@ -49,6 +46,8 @@ class LoginCubit extends Cubit<LoginState> {
             Navigator.pushReplacementNamed(context, StudentHomePage.id);
           } else if (actualRole == 'دكتور') {
             Navigator.pushReplacementNamed(context, DoctorsHomeView.id);
+          } else if (actualRole == 'موظف') {
+            Navigator.pushReplacementNamed(context, EmployeeHomeView.id);
           }
         } else {
           await FirebaseAuth.instance.signOut();

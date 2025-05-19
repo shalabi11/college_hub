@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-// import 'package:flutter/cupertino.dart';
+
 import 'package:hive_flutter/adapters.dart';
 
 String getTitleForIndexStudent(int index) {
@@ -13,6 +13,23 @@ String getTitleForIndexStudent(int index) {
       return 'الدرجات';
     case 3:
       return 'القاعة الامتحانية';
+    case 4:
+      return 'الملف الشخصي';
+    default:
+      return '';
+  }
+}
+
+String getTitleForIndexEmp(int index) {
+  switch (index) {
+    case 0:
+      return 'الرئيسية';
+    case 1:
+      return 'الاعلانات';
+    case 2:
+      return 'الطلاب';
+    case 3:
+      return ' الاساتذة';
     case 4:
       return 'الملف الشخصي';
     default:

@@ -1,34 +1,38 @@
+// student_home_page.dart
+
 import 'package:college_hub/functions.dart';
-import 'package:college_hub/views/students_views/assignment_view.dart';
-import 'package:college_hub/views/students_views/grades_view.dart';
+
+import 'package:college_hub/views/doctors_views/send_not_view.dart';
+import 'package:college_hub/views/employees_views/ads_view.dart';
+import 'package:college_hub/views/employees_views/dashboard_for_emp.dart';
+import 'package:college_hub/views/employees_views/information_about_doctors.dart';
+import 'package:college_hub/views/employees_views/information_about_student.dart';
+
 import 'package:college_hub/widgets/Icon_theme.dart';
 import 'package:college_hub/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:college_hub/views/students_views/dashboard_view.dart';
-import 'package:college_hub/views/students_views/study_schedule_view.dart';
 
-import 'package:college_hub/views/students_views/notification_view.dart';
 import 'package:college_hub/views/students_views/profile_view.dart';
 import 'package:college_hub/constant.dart';
 
-class StudentHomePage extends StatefulWidget {
-  static String id = 'student_home';
-  const StudentHomePage({super.key});
+class EmployeeHomeView extends StatefulWidget {
+  static String id = 'employee_home'; // استخدمه بالتنقل
+  const EmployeeHomeView({super.key});
 
   @override
-  State<StudentHomePage> createState() => _StudentHomePageState();
+  State<EmployeeHomeView> createState() => _EmployeeHomeView();
 }
 
-class _StudentHomePageState extends State<StudentHomePage> {
+class _EmployeeHomeView extends State<EmployeeHomeView> {
   int _selectedIndex = 0;
 
   final List<Widget> _views = [
-    DashboardView(),
-    StudyScheduleView(),
-
-    GradesView(),
-    AssignmentView(),
-    ProfileView(name: 'اسم الطالب', role: 'طالب', uid: 'الرقم الجامعي'),
+    // DashboardForDoctors(),
+    DashboardForEmp(),
+    AdsView(),
+    InformationAboutStudent(),
+    InformationAboutDoctors(),
+    ProfileView(name: 'اسم الموظف', role: 'موظف', uid: 'id'),
   ];
 
   void _onItemTapped(int index) {
@@ -41,13 +45,13 @@ class _StudentHomePageState extends State<StudentHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
-        title: getTitleForIndexStudent(_selectedIndex),
+        title: getTitleForIndexEmp(_selectedIndex),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, NotificationView.id);
+              Navigator.pushNamed(context, SendNotView.id);
             },
-            icon: Icon(Icons.notifications),
+            icon: Icon(Icons.edit_notifications_outlined),
           ),
           IconThemeApp(),
         ],
@@ -68,16 +72,19 @@ class _StudentHomePageState extends State<StudentHomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
-            label: 'الجدول',
+            label: 'الاعلانات',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'الدرجات'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.task),
-            label: 'القاعة الامتحانية',
+            icon: Icon(Icons.school), // ← الدرجات بدل الإعلانات
+            label: 'الطلاب',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.task), // ← الواجبات بدل الإشعارات
+            label: 'الاساتذة ',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
-            label: 'الملف الشخصي',
+            label: ' الملف الشخصي',
           ),
         ],
       ),

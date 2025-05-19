@@ -1,4 +1,3 @@
-// import 'package:college_hub/widgets/Bottom_navigate_bar.dart';
 import 'package:college_hub/core/styles.dart';
 import 'package:college_hub/widgets/card_for_student_schedule.dart';
 import 'package:college_hub/widgets/custom_app_bar.dart';
@@ -37,9 +36,8 @@ class _NotificationViewState extends State<NotificationView> {
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
-            // SizedBox(height: 20),
             SizedBox(height: 15),
-            // Center(child: Text('الاحد 12 ابريل', style: Styles.textStyle20)),
+
             CardForStudentSchedule(isRead: isRead),
             CardForStudentSchedule(isRead: isRead),
             CardForStudentSchedule(isRead: isRead),

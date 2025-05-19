@@ -1,6 +1,5 @@
-// import 'package:college_hub/constant.dart';
 import 'package:college_hub/core/styles.dart';
-import 'package:college_hub/widgets/card_for_dashboard_doctors.dart';
+
 import 'package:flutter/material.dart';
 
 class CardForDoctorsSchedule extends StatelessWidget {
@@ -39,14 +38,12 @@ class CardForDoctorsSchedule extends StatelessWidget {
                     Text(
                       text,
                       style: Styles.textStyle20.copyWith(
-                        // color: kTextColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
                       date,
                       style: Styles.textStyle14.copyWith(
-                        // color: kTextColor,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -55,7 +52,6 @@ class CardForDoctorsSchedule extends StatelessWidget {
                       child: Text(
                         time,
                         style: Styles.textStyle14.copyWith(
-                          // color: kTextColor,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -65,7 +61,6 @@ class CardForDoctorsSchedule extends StatelessWidget {
                 Text(
                   place,
                   style: Styles.textStyle14.copyWith(
-                    // color: kTextColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

@@ -18,8 +18,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.start,
 
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        // spacing: 50,
         children: [
           Image.asset(logo, height: 60),
 

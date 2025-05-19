@@ -1,15 +1,13 @@
-// import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_hub/cubit/login_state.dart';
 import 'package:college_hub/functions.dart';
 import 'package:college_hub/views/doctors_views/doctors_home_view.dart';
+import 'package:college_hub/views/employees_views/employee_home_view.dart';
 import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
-// import 'package:hive/hive.dart';
 
 class SignUpCubit extends Cubit<LoginState> {
   SignUpCubit() : super(LoginInitial());
@@ -22,8 +20,6 @@ class SignUpCubit extends Cubit<LoginState> {
     String role,
     BuildContext context,
   ) async {
-    // print(email);
-    // print(password);
     emit(LoginLoading());
     try {
       final userCredential = await auth.createUserWithEmailAndPassword(
@@ -35,7 +31,6 @@ class SignUpCubit extends Cubit<LoginState> {
       await firestore.collection('users').doc(uid).set({
         'email': email,
         'role': role,
-        // 'name': name,
       });
       saveLoginData(email, password);
       var box = await Hive.openBox('college');
@@ -48,9 +43,9 @@ class SignUpCubit extends Cubit<LoginState> {
         Navigator.pushReplacementNamed(context, StudentHomePage.id);
       } else if (role == 'دكتور') {
         Navigator.pushReplacementNamed(context, DoctorsHomeView.id);
+      } else if (role == 'موظف') {
+        Navigator.pushReplacementNamed(context, EmployeeHomeView.id);
       }
-
-      // emit(LoginFailure(message: 'خطأ في اسم المتسخدم او كلمة المرور  '));
     } on FirebaseAuthException catch (e) {
       emit(LoginFailure(message: e.message ?? 'خطأ في انشاء الحساب'));
     } catch (e) {

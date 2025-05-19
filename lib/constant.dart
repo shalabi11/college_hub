@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryBlue = Color(0xFF3B82F6); // لون أزرق أساسي مشابه للمستخدم في HTML
+const kPrimaryBlue = Color(0xFF3B82F6);
 const kLightBlueBackground = Color(0xFFECF4FF);
 const kCardBorder = Color(0xFFE5E7EB);
 const kTextColor = Color(0xFF374151);

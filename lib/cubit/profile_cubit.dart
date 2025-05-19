@@ -1,16 +1,12 @@
-// 📦 profile_cubit.dart
 import 'dart:developer';
 import 'dart:io';
-// ignore: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:college_hub/cubit/profile_state.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:meta/meta.dart';
-
-// part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   ProfileCubit() : super(ProfileInitial());

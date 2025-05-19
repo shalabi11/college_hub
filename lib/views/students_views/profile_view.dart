@@ -1,21 +1,15 @@
-// import 'package:college_hub/widgets/Bottom_navigate_bar.dart';
-// import 'package:college_hub/constant.dart';
 import 'dart:developer';
 
 import 'package:college_hub/core/styles.dart';
 import 'package:college_hub/cubit/profile_cubit.dart';
 import 'package:college_hub/cubit/profile_state.dart';
 import 'package:college_hub/helper/show_snack_bar.dart';
-// import 'package:college_hub/functions.dart';
-// import 'package:college_hub/model/theme.dart';
-// import 'package:college_hub/views/login_page.dart';
-// import 'package:college_hub/widgets/custom_bottun.dart';
-import 'package:college_hub/widgets/informationForStudent.dart';
-import 'package:college_hub/widgets/logOutButton.dart';
-// import 'package:college_hub/widgets/textField.dart';
+
+import 'package:college_hub/widgets/information_for_student.dart';
+import 'package:college_hub/widgets/log_out_button.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:hive_flutter/adapters.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({
@@ -63,12 +57,9 @@ class ProfileView extends StatelessWidget {
             ProfileCubit().uploadProfileImage();
           }
           return Scaffold(
-            // appBar: CustomAppBar(),
-            // bottomNavigationBar:,
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Stack(
@@ -92,9 +83,8 @@ class ProfileView extends StatelessWidget {
                   InformationForStudent(name: 'السنة الدراسية'),
                   InformationForStudent(name: "${cubit.user!.email}"),
 
-                  // CustomTextField(text: 'المستوى  '),
-                  // CustomTextField(text: ' البريد الإلكتروني: [email protected]'),
-                  SizedBox(height: 20), LogOutButton(),
+                  SizedBox(height: 20),
+                  LogOutButton(),
                 ],
               ),
             ),

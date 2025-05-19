@@ -26,7 +26,7 @@ class ElevatedButtonForConfirmation extends StatelessWidget {
                 TextButton(
                   child: Text("إلغاء"),
                   onPressed: () {
-                    Navigator.of(context).pop(); // إغلاق الديالوج
+                    Navigator.of(context).pop();
                   },
                 ),
                 ElevatedButton(onPressed: onTap, child: Text(conf)),

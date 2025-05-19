@@ -1,28 +1,27 @@
 import 'package:college_hub/constant.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
+  const CustomTextField({
     super.key,
     required this.text,
     this.onChanged,
     this.obscure,
     this.icon,
     this.keyboardType,
-    required this.validator,
+    this.validator,
 
     this.controller,
     this.maxLine,
   });
-  String? text;
-  bool? obscure;
-  Icon? icon;
-  int? maxLine;
-  TextEditingController? controller;
-  TextInputType? keyboardType;
-  Function(String)? onChanged;
-  String? Function(String?)? validator;
+  final String? text;
+  final bool? obscure;
+  final Icon? icon;
+  final int? maxLine;
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final Function(String)? onChanged;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -30,6 +29,7 @@ class CustomTextField extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20),
         child: TextFormField(
+          // cursorWidth: BorderSide.strokeAlignInside,
           maxLines: maxLine,
           validator: validator,
           onChanged: onChanged,
@@ -43,10 +43,7 @@ class CustomTextField extends StatelessWidget {
               color: kPrimaryBlue,
               fontWeight: FontWeight.w100,
             ),
-            // labelStyle: const TextStyle(
-            //   color: kPrimaryBlue,
-            //   fontWeight: FontWeight.w100,
-            // ),
+
             border: OutlineInputBorder(
               borderSide: const BorderSide(
                 color: kPrimaryBlue,
@@ -56,7 +53,7 @@ class CustomTextField extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
               gapPadding: 12,
             ),
-            // hintText: text,
+
             hintStyle: const TextStyle(color: kPrimaryBlue),
           ),
           textAlign: TextAlign.start,

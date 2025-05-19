@@ -1,5 +1,3 @@
-// import 'dart:developer';
-
 import 'package:college_hub/constant.dart';
 
 import 'package:college_hub/cubit/login_state.dart';
@@ -10,7 +8,7 @@ import 'package:college_hub/model/user_model.dart';
 import 'package:college_hub/views/login_page.dart';
 
 import 'package:college_hub/widgets/custom_bottun.dart';
-import 'package:college_hub/widgets/textField.dart';
+import 'package:college_hub/widgets/text_field.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +16,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({super.key});
+  const SignUpPage({super.key});
   static String id = 'signUp';
 
   @override

@@ -1,16 +1,15 @@
 // import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:college_hub/constant.dart';
 import 'package:college_hub/cubit/login_cubit.dart';
 import 'package:college_hub/cubit/login_state.dart';
 import 'package:college_hub/helper/show_snack_bar.dart';
 import 'package:college_hub/views/sign_up_page.dart';
-// import 'package:college_hub/views/students_views/dashboard_view.dart';
+
 import 'package:college_hub/views/students_views/student_home_page.dart';
 import 'package:college_hub/widgets/custom_bottun.dart';
-import 'package:college_hub/widgets/textField.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:college_hub/widgets/text_field.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -45,29 +44,11 @@ class _LoginPageState extends State<LoginPage> {
         child: Scaffold(
           body: BlocConsumer<LoginCubit, LoginState>(
             listener: (context, state) async {
-              // final user = FirebaseAuth.instance.currentUser;
-
-              // final doc =
-              //     await FirebaseFirestore.instance
-              //         .collection('users')
-              //         .doc(user!.uid)
-              //         .get();
-
-              // final savedRole = doc.data()?['role'];
-
               if (state is LoginSucces) {
                 showSnackBar(context, 'تم تسجيل الدخول بنجاح', Colors.green);
 
                 isLoadin = false;
                 setState(() {});
-                // await FirebaseAuth.instance.signOut(); // نسجل خروج مباشرة
-                // return;
-                // }
-
-                // isLoadin = false;
-                // setState(() {});
-
-                // Navigator.pushReplacementNamed(context, StudentHomePage.id);
               } else if (state is LoginFailure) {
                 isLoadin = false;
                 setState(() {});
@@ -86,20 +67,10 @@ class _LoginPageState extends State<LoginPage> {
                     key: formKey,
                     child: SingleChildScrollView(
                       child: Column(
-                        // crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          // Icon(Icons.school, size: 150, color: kPrimaryBlue),
-                          // Text(
-                          //   "CollegeHub",
-                          //   style: TextStyle(
-                          //     fontSize: 30,
-                          //     fontWeight: FontWeight.bold,
-                          //     color: kPrimaryBlue,
-                          //   ),
                           Image.asset(logo, height: 300),
 
-                          // SizedBox(height: 20),
                           CustomTextField(
                             validator: (p0) {
                               if (p0 == null || p0.isEmpty) {
@@ -118,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: kTextLight,
                             ),
                           ),
-                          // SizedBox(height: 20),
+
                           CustomTextField(
                             maxLine: 1,
                             validator: (p0) {
@@ -151,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                                 );
 
                                 var box = await Hive.openBox('college');
-                                // box.clear();
+
                                 box.put('isLoggedIn', true);
                               }
                               isLoadin = false;
@@ -216,9 +187,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-
-//   Future<void> loginUser() async {
-//     UserCredential userCredential = await FirebaseAuth.instance
-//         .signInWithEmailAndPassword(email: email.text, password: password.text);
-//   }
-// }
